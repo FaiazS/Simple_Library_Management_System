@@ -1,10 +1,15 @@
-package com.scaler.LibraryUsers;
+package com.scaler.Library;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryMember extends User {
 
-    final int maxBorrowingLimit = 5;
+    private final static int maxBorrowingLimit = 5;
 
-    int borrowedBooks;
+    private int borrowedBooks;
+
+    private List<Book> borrowedBookList = new ArrayList<Book>();
 
     public LibraryMember() {
 
@@ -26,6 +31,13 @@ public class LibraryMember extends User {
 
     }
 
+
+
+    public int getBorrowedBooks() {
+
+        return borrowedBooks;
+    }
+
     @Override
     public void displayDashboard() {
 
@@ -33,6 +45,11 @@ public class LibraryMember extends User {
         System.out.println("Name : " + getUsername());
         System.out.println("Contact : " + getContactInfo());
         System.out.println("Books Borrowed : " + borrowedBooks);
+
+        for(Book book : borrowedBookList) {
+
+            System.out.println("List :" + book);
+        }
     }
 
     @Override
@@ -43,5 +60,12 @@ public class LibraryMember extends User {
             return true;
         }
         return false;
+    }
+
+    @Override
+
+    public void canReturnBooks(){
+
+        borrowedBooks -= 1;
     }
 }

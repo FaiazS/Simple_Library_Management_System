@@ -1,4 +1,4 @@
-package com.scaler.LibraryUsers;
+package com.scaler.Library;
 
 public abstract class User {
 
@@ -40,7 +40,7 @@ public abstract class User {
         this.userId = generateUniqueID();
     }
 
-    public final String generateUniqueID(){
+    private final String generateUniqueID(){
 
         totalUsers += 1;
         return "user_" + totalUsers;
@@ -63,5 +63,7 @@ public abstract class User {
     public abstract void displayDashboard();
 
     public abstract boolean canBorrowBooks();
+
+    public abstract void canReturnBooks();
 
 }

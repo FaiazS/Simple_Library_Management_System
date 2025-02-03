@@ -1,12 +1,15 @@
-package com.scaler.LibraryUsers;
+package com.scaler.Library;
 
-public class Book {
+import java.io.Serializable;
+
+public abstract class Book implements Lendable {
 
     private String ISBN;
     private String title;
     private String author;
     private String publisher;
     private String pages;
+    private boolean isAvailable;
 
     public void setISBN(String ISBN){
 
@@ -57,18 +60,38 @@ public class Book {
         return pages;
     }
 
+    public void setAvailable(boolean isAvailable){
+
+        this.isAvailable = isAvailable;
+    }
+    public boolean getAvailable(){
+
+        return isAvailable;
+    }
+
     public Book(){
+
+        isAvailable = true;
 
 
     }
 
-    public Book(String ISBN, String title, String author, String publisher, String pages) {
+    public Book(String ISBN, String title, String author, String publisher, String pages, boolean isAvailable) {
 
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.pages = pages;
+        this.isAvailable = true;
+    }
+
+    public Book(String ISBN, String title, String author){
+
+        this.ISBN = ISBN;
+        this.title = title;
+        this.author = author;
+
     }
 
     public Book(Book otherBook){
@@ -78,5 +101,27 @@ public class Book {
         this.author = otherBook.author;
         this.publisher = otherBook.publisher;
         this.pages = otherBook.pages;
+        this.isAvailable = otherBook.isAvailable;
     }
+
+    @Override
+    public boolean lendBook(User user) {
+
+        if(isAvailable && user.canBorrowBooks()){
+
+            isAvailable = false;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void returnBook(User user){
+
+        isAvailable = true;
+        user.canReturnBooks();
+    }
+
+    public abstract void displayBookDetails();
+
 }

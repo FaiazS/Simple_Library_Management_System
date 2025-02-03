@@ -1,8 +1,11 @@
-package com.scaler.LibraryUsers;
+package com.scaler.Library;
+
+import java.util.List;
 
 public class Librarian extends User {
 
     private String employeeId;
+    private List<Book> books;
 
 
     public Librarian() {
@@ -39,6 +42,10 @@ public class Librarian extends User {
         System.out.println("Name: " + getUsername());
         System.out.println("Contact Info: " + getContactInfo());
 
+        for(Book book : books){
+
+            System.out.println("Books read: " + book);
+        }
     }
 
     @Override
@@ -46,12 +53,17 @@ public class Librarian extends User {
 
         return true;
     }
+    @Override
+    public void canReturnBooks(){
+
+        System.out.println("Librarian Can Return Books");
+    }
 
     public void addBook(Book book){
 
         System.out.println("Added book in Catalogue: " + book);
     }
-    
+
     public void removeBook(Book book){
 
         System.out.println("Removed book from Catalogue: " + book);
